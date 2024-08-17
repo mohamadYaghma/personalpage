@@ -27,6 +27,7 @@ app.interceptors.request.use(
           return Promise.reject(error);
         }
       }
+      return Promise.reject(err);
     },
     );
 // end reset refresh toen for generated new access token.
