@@ -2,24 +2,27 @@
 import React, { useEffect, useState } from 'react'
 import SendOtpForm from './SendOtpForm'
 import toast from 'react-hot-toast';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation } from "@tanstack/react-query";
 import {getOtp , checkOtp} from '@/services/autchServices';
 import CheckOtpForm from './CheckOtpForm';
+import { useRouter } from 'next/navigation';
 
 const RESEND_TIME = 90 ;
 
 export default function AuthPage() {
+  const router = useRouter();
+
   const [time , setTime] = useState(RESEND_TIME);
 
-  const [phoneNumber , setPhoneNumber] = useState("09999999999");
+  const [phoneNumber , setPhoneNumber] = useState("09155555555");
 
   const [otp, setOtp] = useState("");
 
   const [step , setStep]=useState(2)
 
-  const { data , error , isLoading , mutateAsync:mutateGetOtp } = useMutation({mutationFn:getOtp,});
+  const { data:OtpResponse , error , isLoading , mutateAsync:mutateGetOtp } = useMutation({mutationFn:getOtp,});
 
-  const { mutateAsync:mutateCheckOtp } = useMutation({mutationFn:checkOtp,});
+  const { mutateAsync:mutateCheckOtp , isLoading:isCheckingOtp} = useMutation({mutationFn:checkOtp,});
  
   useEffect(()=>{
     const timer = time > 0 && setInterval(()=>setTime((t)=>t-1),1000);
@@ -38,7 +41,8 @@ export default function AuthPage() {
       const data = await mutateGetOtp({phoneNumber});   
       toast.success(data.message);
       setStep(2);
-      setTime(RESEND_TIME)
+      setTime(RESEND_TIME);
+      setOtp("");
     }catch(error){
 
       toast.error(error?.response?.data.message)
@@ -50,10 +54,13 @@ export default function AuthPage() {
     e.preventDefault();
 
     try{
-      const data = await mutateCheckOtp({phoneNumber , otp});   
-      toast.success(data.message);
-      setStep(2);
-
+      const {message , user} = await mutateCheckOtp({phoneNumber , otp});   
+      toast.success(message);
+      if(user.isActive){
+        router.push("/");
+      }else{
+        router.push("/complete-profile")
+      }
     }catch(error){
 
       toast.error(error?.response?.data.message)
@@ -81,6 +88,8 @@ export default function AuthPage() {
               setOtp={setOtp}
               time={time}
               onResendOtp={sendOtpHandler}
+              OtpResponse={OtpResponse}
+              isCheckingOtp={isCheckingOtp}
               />
         )
       default:

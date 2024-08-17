@@ -17,14 +17,12 @@ export default function SendOtpForm({phoneNumber , onChange ,onsubmit,isLoading}
                   />
             </div>
             <div>
-                {
-                  isLoading ? (
-                  <Loading />
-                ):(
-                  <button type="submit" className="btn btn--primary w-full">
-                    ارسال کد تایید
-                  </button>
-                )}
+            {(
+            isLoading ? <Loading />: (
+            <button type="submit" className="btn btn--primary w-full">
+              ارسال کد تایید
+            </button>
+          ))}
              </div>
         </form>
     </div>
