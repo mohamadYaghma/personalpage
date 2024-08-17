@@ -13,14 +13,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" dir="rtl">
       <body className={`${vazirfont.variable} font-sans` }>
-        <Toaster />
-        <Header/>
-        <div className='container xl:max-w-screen-xl'>
-          <Providers>
-            {children}  
-          </Providers>  
-        </div>
-        </body>
+        <Providers>
+          <Toaster />
+          <Header/>
+          <div className='container xl:max-w-screen-xl'>
+            {children}   
+          </div>
+        </Providers> 
+      </body>
     </html>
   )
 }

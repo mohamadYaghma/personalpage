@@ -14,11 +14,11 @@ export default function AuthPage() {
 
   const [time , setTime] = useState(RESEND_TIME);
 
-  const [phoneNumber , setPhoneNumber] = useState("09155555555");
+  const [phoneNumber , setPhoneNumber] = useState("");
 
   const [otp, setOtp] = useState("");
 
-  const [step , setStep]=useState(2)
+  const [step , setStep]=useState(1)
 
   const { data:OtpResponse , error , isLoading , mutateAsync:mutateGetOtp } = useMutation({mutationFn:getOtp,});
 

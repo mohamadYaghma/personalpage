@@ -34,7 +34,7 @@ export default function CheckOtpForm({onSubmit , otp , setOtp,  onBack , time  ,
                   border:"1px solid rgb(var(--color-primary-300))",
                   borderRadius:".5rem",
                 }}
-                containerStyle="flex  gap-x-2 justify-center"
+                containerStyle="flex flex-row-reverse gap-x-2 justify-center"
                 renderInput={(props) => <input {...props} />          
               }
     />
