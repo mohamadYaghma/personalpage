@@ -19,7 +19,7 @@ app.interceptors.request.use(
         originalConfig._retry =true ; 
         // fetch refresh token api
         try {
-        const {data} = await app.get("/user/refresh-token",
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user/refresh-token`,
         {withCredentials:true
         });
         if(data) return app(originalConfig);
