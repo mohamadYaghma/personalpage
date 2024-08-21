@@ -2,6 +2,7 @@ import { ThreeDots } from "react-loader-spinner";
 
 function Loading({ width = "75", heigh = "40" }) {
   return (
+    
     <ThreeDots
       height={heigh}
       width={width}
@@ -14,6 +15,7 @@ function Loading({ width = "75", heigh = "40" }) {
       }}
       visible={true}
     />
+
   );
 }
 export default Loading;

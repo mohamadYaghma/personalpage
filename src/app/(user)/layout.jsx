@@ -1,8 +1,8 @@
 import vazirfont from '@/constants/localFonts'
-import './globals.css'
-import Header from './Header'
+import '../globals.css'
+import Header from '../Header'
 import { Toaster } from 'react-hot-toast'
-import Providers from './providers'
+import Providers from '../providers'
 
 export const metadata = {
   title: 'AdminPanel',
