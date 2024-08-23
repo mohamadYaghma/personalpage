@@ -15,7 +15,7 @@ export default function Profile() {
   return (
 
     <div className='p-8'>      
-      <h1 className='mb-5'>{user.name}خوش آمدی</h1>
+      <h1 className='mb-5'>سلام <sapn className="font-bold">{user.name}</sapn> خوش آمدی ! </h1>
 
       <p>
         <span> تاریخ پیوستن : </span>

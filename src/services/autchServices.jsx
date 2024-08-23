@@ -20,3 +20,7 @@ export function getUserProfile() {
 export function updateProfile(data) {
   return http.patch("/user/update" , data).then(({ data }) => data.data);
 }
+
+export function logote() {
+  return http.post("/user/logout");
+}

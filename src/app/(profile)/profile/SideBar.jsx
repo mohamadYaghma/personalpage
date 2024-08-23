@@ -1,7 +1,18 @@
+"use client"
+import { logote } from '@/services/autchServices'
 import Link from 'next/link'
 import React from 'react'
 
 export default function SideBar() {
+
+    const logouteHandler = async () =>{
+        await logote();
+        // localStorage.removeItem("userInfo");
+        // localStorage.removeItem("cartItems");
+        // localStorage.removeItem("token");
+        document.location.href = "/";
+    }
+
   return (
     <div> 
         <ul className='flex flex-col space-y-8 '>
@@ -9,7 +20,10 @@ export default function SideBar() {
                 <Link href={"/"}>صفحه اصلی</Link>
             </li>
             <li>
-            <Link href={"/profile/me"}>اطلاعات کاربری</Link>
+                <Link href={"/profile"}>داشبورد</Link>
+            </li>
+            <li>
+                <Link href={"/profile/me"}>اطلاعات کاربری</Link>
             </li>
             <li>
                 <Link href={"/"}>محصولات خریداری شده</Link>
@@ -18,7 +32,7 @@ export default function SideBar() {
                 <Link href={"/"}>سفارش ها</Link>
             </li>
             <li>
-                <Link href={"/"}>خروج</Link>
+                <button onClick={logouteHandler}>خروج از حساب کاربری</button>
             </li>
         </ul>
     </div>

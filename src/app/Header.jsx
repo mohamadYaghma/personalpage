@@ -17,7 +17,7 @@ export default function Header() {
                     </Link>
                 </li>
                 <li>
-                    <Link className='block py-2' href={"/producs"}> 
+                    <Link className='block py-2' href={"/products"}> 
                         محصولات
                     </Link>
                 </li>
