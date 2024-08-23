@@ -1,8 +1,13 @@
 import { getCategories } from "@/services/categortService";
 import { getProducts } from "@/services/productService";
 import CategorySidebar from "./[slug]/CategorySidebar";
-export default async function Products() {
-    const {products} = await getProducts();
+import queryString from "query-string";
+
+export const dynamic = "force-dynamic"; // use this code for this page used ssr Like cash in fetch no-store 
+
+export default async function Products({searchParams}) {
+
+    const {products} = await getProducts(queryString.stringify(searchParams));
     const {categories} = await getCategories();
   return (
     <div>
