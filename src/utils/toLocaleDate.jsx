@@ -10,3 +10,7 @@ const options = {
   return new Date(data).toLocaleDateString("fa-IR" , options);
   
 }
+
+export function toLocalDateStringShort(data) {
+  return new Date(data).toLocaleDateString("fa-IR");
+}

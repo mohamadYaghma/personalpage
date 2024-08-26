@@ -8,3 +8,8 @@ export function getProducts(qs){
     // .then((res)=>res.json())
     // .then(({data})=>data);
 }  
+
+export function getOneProductsBySlug(slug){
+    return http.get(`/product/slug/${slug}`).then(({data})=>data.data);
+
+}  
