@@ -5,6 +5,7 @@ import './TableStyle.css'  // اضافه کردن فایل استایل سفار
 import { useAddTocart, useDecrementFromCart } from '@/hooks/useCart';
 import toast from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
+import { toPersianNumbers, toPersianNumbersWithComma } from '@/utils/toPersianNumber';
 
 
 export default function CartItem({cartItemm}) {
@@ -52,17 +53,19 @@ export default function CartItem({cartItemm}) {
 
                 <TableRow  key={cartItemm._id}>
                     <TableCell className='font-bold'>{cartItemm.title}</TableCell>
-                    <TableCell>تعداد : {cartItemm.quantity}</TableCell>
+                    <TableCell>تعداد : {toPersianNumbers(cartItemm.quantity) }</TableCell>
                     <TableCell>
                     قیمت :
                         {" "}
                         <span className={`${cartItemm.discount ? "line-through text-gray-500" : "font-bold" } ` }>
-                           {cartItemm.price} 
+                           {toPersianNumbersWithComma(cartItemm.price)} 
                         </span>
                         <div>
                             {!!cartItemm.discount && (
                                 <div className='flex items-center gap-x-2 mt-2 mr-16'>
-                                    <p className='font-bold'>{cartItemm.offPrice}</p>
+                                    <p className='font-bold'>
+                                        {toPersianNumbersWithComma (cartItemm.offPrice)}
+                                    </p>
                                     <div className='bg-rose-500 px-2 py-0.5 rounded-xl text-white text-sm'>
                                         {cartItemm.discount} %
                                     </div>

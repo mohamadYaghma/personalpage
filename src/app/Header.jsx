@@ -1,5 +1,6 @@
 "use client"
 import { useGetUser } from '@/hooks/useAuth';
+import { toPersianNumbers } from '@/utils/toPersianNumber';
 import Link from 'next/link'
 
 export default function Header() {
@@ -33,7 +34,7 @@ export default function Header() {
                 </li>
                 <li>
                     <Link className='block py-2' href={"/cart"}> 
-                        سبدخرید - ({cart ? cart.payDetail.productIds.length : 0})
+                        سبدخرید - ({cart ? toPersianNumbers(cart.payDetail.productIds.length) : 0})
                     </Link>
                 </li>
             {

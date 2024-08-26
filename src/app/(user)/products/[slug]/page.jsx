@@ -1,5 +1,6 @@
 import { getOneProductsBySlug, getProducts } from '@/services/productService'
 import AddToCart from './AddToCart';
+import { toPersianNumbersWithComma } from '@/utils/toPersianNumber';
 export const dynamic = "force-static"; // this page convert to ssg static side generat 
 export default async function page({params}) {
     const {slug} = params;
@@ -19,7 +20,7 @@ export default async function page({params}) {
         قیمت محصول : {" "}
         <span className={`${product.discount ? "line-through" : "font-bold"}`}>
           {" "}
-          {product.price}
+          {toPersianNumbersWithComma(product.price)}
         </span>
       </p>
       {/* Off price */}
