@@ -1,0 +1,32 @@
+.customTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center; /* مرکزچین کردن محتوای سلول‌ها */
+    direction: rtl;
+    table-layout: fixed;
+  }
+  
+  .customColumn {
+    padding: 16px;
+    font-weight: bold;
+    text-align: center; /* مرکزچین کردن عنوان ستون‌ها */
+  }
+  
+  .customCell {
+    padding: 16px;
+    vertical-align: middle; /* عمودی مرکزچین کردن محتوای سلول‌ها */
+    text-align: center; /* افقی مرکزچین کردن محتوای سلول‌ها */
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* افزودن رنگ به ردیف‌های زوج */
+  }
+  
+  tbody tr:hover {
+    background-color: #ddd; /* تغییر رنگ پس زمینه هنگام hover */
+  }
+  /*  /////////////////////////////////////////////////////// */
+
+.customTable th {
+    width: 25%; /* عرض ثابت برای هر ستون */
+}

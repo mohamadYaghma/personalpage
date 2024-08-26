@@ -4,6 +4,7 @@ import CategorySidebar from "./CategorySidebar";
 import queryString from "query-string";
 import Link from "next/link";
 import {toLocalDateStringShort } from "@/utils/toLocaleDate"
+import AddToCart from "./[slug]/AddToCart";
 
 export const dynamic = "force-dynamic"; // use this code for this page used ssr Like cash in fetch no-store 
 
@@ -29,6 +30,8 @@ export default async function Products({searchParams}) {
                                 <Link href={`/products/${product.slug}`} 
                                     className="text-sm text-primary-900"
                                 >مشاهده محصول</Link>
+                                
+                                    <AddToCart product={product} />
                             </div>
                         );
                     })}
