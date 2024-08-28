@@ -26,10 +26,7 @@ export default function SideBar() {
                 <Link href={"/profile/me"}>اطلاعات کاربری</Link>
             </li>
             <li>
-                <Link href={"/"}>محصولات خریداری شده</Link>
-            </li>
-            <li>
-                <Link href={"/"}>سفارش ها</Link>
+                <Link href={"/profile/payments"}>سابقه سفارش</Link>
             </li>
             <li>
                 <button onClick={logouteHandler}>خروج از حساب کاربری</button>

@@ -15,11 +15,11 @@ export default function RootLayout({ children }) {
       <body className={`${vazirfont.variable} font-sans` }>
         <Providers>
           <Toaster />
-          <div className='grid grid-cols-4 bg-whie h-screen'>
+          <div className='grid grid-cols-5 bg-whie h-screen'>
             <div className='col-span-1 bg-gray-100 overflow-y-auto p-4'>
                 <SideBar />
             </div>
-            <div className='container xl:max-w-screen-xl mr-10 mt-5'>
+            <div className='col-span-4 overflow-y-auto p-4 xl:max-w-screen-xl'>
               {children}   
             </div>
           </div>

@@ -5,13 +5,32 @@ import queryString from "query-string";
 import Link from "next/link";
 import {toLocalDateStringShort } from "@/utils/toLocaleDate"
 import AddToCart from "./[slug]/AddToCart";
+import LikeProduct from "./LikeProduct";
+import { cookies } from 'next/headers'
+import { toStringCookies } from "@/utils/toStringCookies,";
 
 export const dynamic = "force-dynamic"; // use this code for this page used ssr Like cash in fetch no-store 
 
-export default async function Products({searchParams}) {
 
-    const {products} = await getProducts(queryString.stringify(searchParams));
-    const {categories} = await getCategories();
+export default async function Products({searchParams}) {
+    
+    const cookieStore = cookies()
+    const strCookies = toStringCookies(cookieStore);
+
+    const productPromises = getProducts(
+        queryString.stringify(searchParams),
+        strCookies
+    );
+
+    const categoryPromises = getCategories();
+
+    const [{products},{categories}] = await Promise.all([
+        productPromises,
+        categoryPromises
+    ])
+
+    // const {products} = await getProducts(queryString.stringify(searchParams) , strCookies);
+    // const {categories} = await getCategories();
   return (
     <div>
         <h1 className="font-bold mb-6 text-xl">صفحه محصولات</h1>
@@ -22,16 +41,24 @@ export default async function Products({searchParams}) {
                     {products.map((product)=>{
                         return(
                             <div className="col-span-1 border rounded-xl shadow-md p-4 flex flex-col gap-5" key={product._id}>
-                                <h2 className="font-bold text-xl text-secondary-700">{product.title}</h2>
+                                <h2 className="font-bold text-xl text-secondary-700">
+                                    {product.title}
+                                </h2>
                                 <div>
                                     <span>زمان انتشار محصول :</span>
-                                    <span>{toLocalDateStringShort(product.createdAt)} </span>    
+                                    <span>
+                                        {toLocalDateStringShort(product.createdAt)}     
+                                    </span>    
                                 </div>
-                                <Link href={`/products/${product.slug}`} 
-                                    className="text-sm text-primary-900"
-                                >مشاهده محصول</Link>
                                 
-                                    <AddToCart product={product} />
+                                <Link 
+                                    href={`/products/${product.slug}`} 
+                                    className="text-sm text-primary-900"
+                                >
+                                    مشاهده محصول
+                                </Link>
+                                <LikeProduct product={product}/>
+                                <AddToCart product={product} />
                             </div>
                         );
                     })}
