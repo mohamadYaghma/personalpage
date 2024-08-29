@@ -27,7 +27,7 @@ export default function UsersTable({users}) {
                         return(
                             <tr key={user._id}>
                                 <td className='table__td'>
-                                    {index}
+                                    {index + 1}
                                 </td>
 
                                 <td className='table__td'>

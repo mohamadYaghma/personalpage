@@ -91,7 +91,7 @@ export const productListTableHeads = [
     },
     {
         id:8,
-        label:"مشاهده"
+        label:"عملیات"
     },
 
 ]
@@ -140,6 +140,37 @@ export const AddproductListTableHeads = [
         id:9,
         label:"لینک عکس محصول",
         name:"imageLink"
+    },
+
+]
+
+// category
+
+
+export const categoriesListTableHeads = [
+    {
+        id:1,
+        label:"#"
+    },
+    {
+        id:2,
+        label:"عنوان"
+    },
+    {
+        id:3,
+        label:"نام انگلیسی"
+    },
+    {
+        id:4,
+        label:"توضیحات"
+    },
+    {
+        id:5,
+        label:"نوع دسته بندی"
+    },
+    {
+        id:6,
+        label:"عملیات"
     },
 
 ]

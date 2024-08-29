@@ -17,7 +17,10 @@ export function getProducts( qs , cookies ){
 
 export function getOneProductsBySlug(slug){
     return http.get(`/product/slug/${slug}`).then(({data})=>data.data);
+}  
 
+export function getOneProductsById(id){
+  return http.get(`/product/${id}`).then(({data})=>data.data);
 }  
 
 export function likeProduct(id) {
@@ -27,4 +30,8 @@ export function likeProduct(id) {
 
 export function addProduct(data) {
   return http.post(`/admin/product/add` , data ).then(({ data }) => data.data);
+}
+
+export function updateProduct({productId , data}) {
+  return http.patch(`/admin/product/update/${productId}` , data ).then(({ data }) => data.data);
 }

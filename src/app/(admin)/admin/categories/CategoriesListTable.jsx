@@ -1,17 +1,17 @@
-import { productListTableHeads } from '@/constants/tableHeads'
+import { categoriesListTableHeads } from '@/constants/tableHeads'
 import Link from 'next/link'
 import { HiEye, HiTrash } from 'react-icons/hi'
 import {  RiEdit2Line } from 'react-icons/ri'
 
 
-export default function ProductListTable({products}) {
+export default function CategoriesListTable({categories}) {
   return (
     <div className='overflow-auto shadow-sm my-8'>
         <table className='border-collapse table-auto w-full text-sm min-w-[800px]'>
             <thead>
                 <tr>
                    {
-                    productListTableHeads.map((item)=>{
+                    categoriesListTableHeads.map((item)=>{
                         return(
                             <th className='whitespace-nowrap table__th' key={item.id}>
                                 {item.label}
@@ -23,40 +23,37 @@ export default function ProductListTable({products}) {
             </thead>
             <tbody>
                 {
-                    products.map((product  , index)=>{
+                    categories.map((category  , index)=>{
                         return(
-                            <tr key={product._id}>
+                            <tr key={category._id}>
                                 <td className='table__td'>
                                     {index + 1}
                                 </td>
 
                                 <td className='table__td font-bold whitespace-nowrap'>
-                                    {product.title}
+                                    {category.title}
                                 </td>
                                 <td className='table__td'>
-                                    {product.category.title}
+                                    {category.englishTitle}
                                 </td>
                                 <td className='table__td '>
-                                    {product.price}          
+                                    {category.description}          
                                 </td>
-                                <td className='table__td'>
-                                    {product.discount}
+                                <td className='table__td' >
+                                    <span  className='px-2 py-1 rounded-xl bg-secondary-500 text-white whitespace-nowrap'>
+                                         {category.type}
+                                    </span>
                                 </td>
-                                <td className='table__td'>
-                                    {product.offPrice}
-                                </td>
-                                <td className='table__td'>
-                                    {product.countInStock}
-                                </td>
+                                
                                 <td className='table__td font-bold text-base'>
                                     <div className='flex items-center gap-x-4'>
-                                        <Link href={`/admin/products/${product._id}`}>
+                                        <Link href={`/admin/categories/${category._id}`}>
                                             <HiEye className='w-6 h-6 text-primary-900' />
                                         </Link>
                                         <button>
                                             <HiTrash className='text-rose-600 w-6 h-6'/>
                                         </button>
-                                        <Link href={`/admin/products/edit/${product._id}`}>
+                                        <Link href={`/admin/categories/edit/${category._id}`}>
                                             <RiEdit2Line className="w-6 h-6 text-secondary-600" />
                                         </Link>
                                     </div>
