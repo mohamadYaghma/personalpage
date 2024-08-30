@@ -174,3 +174,23 @@ export const categoriesListTableHeads = [
     },
 
 ]
+
+export const EditcategoriesListTableHeads = [
+  
+    {
+        id:1,
+        label:"عنوان",
+        name:"title"
+    },
+    {
+        id:2,
+        label:"نام انگلیسی",
+        name:"englishTitle"
+    },
+    {
+        id:3,
+        label:"توضیحات",
+        name:"description"
+    },
+
+]

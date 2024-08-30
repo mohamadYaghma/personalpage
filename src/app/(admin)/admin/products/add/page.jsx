@@ -14,6 +14,7 @@ export default function addProductPage() {
     
     const {data} = useGetCategories();
     const {categories} = data || {};
+    
     const [formData , setFormData] = useState({
         title:"",
         description:"",

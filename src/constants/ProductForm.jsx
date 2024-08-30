@@ -56,7 +56,7 @@ export default function ProductForm({
                     isLoading ? (
                         <Loading />) : (
                         <button className='btn btn--primary w-full' type='submit'>
-                            اضافه کردن محصول
+                            ارسال
                         </button>
                     )
                 }   
