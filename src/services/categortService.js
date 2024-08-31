@@ -14,5 +14,9 @@ export function updateCategory({categoryId , data}) {
 }
 
 export function addCategory(data) {
-  return http.post(`/admin/category/add` , data ).then(({ data }) => data.data);
+  return http.post(`/admin/category/add`, data ).then(({ data }) => data.data);
 }
+
+export function removeCategoryById(id){
+  return http.delete(`/admin/category/remove/${id}`).then(({data})=>data.data);
+} 

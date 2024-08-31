@@ -1,4 +1,4 @@
-import { addProduct, getOneProductsById, getProducts, updateProduct } from "@/services/productService"
+import { addProduct, getOneProductsById, getProducts, removeProduct, updateProduct } from "@/services/productService"
 import { useMutation, useQuery } from "@tanstack/react-query"
 
 export const useGetProducts=()=>{
@@ -30,4 +30,11 @@ export const useGetProductById=(id)=>{
 
 export const useUpdateProduct=()=>{
     return useMutation({mutationFn:updateProduct})
+}
+
+// delete product
+
+
+export const useRemoveProduct=()=>{
+    return useMutation({mutationFn: removeProduct})
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import Loading from '@/common/Loading';
-import CategoryForm from '@/constants/CategoryForm';
+import CategoryForm, { categoryTypes } from '@/constants/CategoryForm';
 import { useGetCategoryById, useUpdateCategory } from '@/hooks/useCategories';
 import includeObject from '@/utils/objectUtils';
 import { useParams, useRouter } from 'next/navigation';
@@ -52,6 +52,7 @@ export default function CategoryEditPage() {
 
   useEffect(()=>{
     if(category) {
+      setSelectedType(categoryTypes.find( c => c.value === category.type))
       setFormData(includeObject(category , includesCategoryKey)) ;
     }
     },[categoryData])
@@ -67,7 +68,7 @@ export default function CategoryEditPage() {
         categoryDataOnChange={handelChange}
         isLoading={isLoadingUpdate}
         categoryData={formData}
-        selectedType={selectedType}
+        selectedType={categoryTypes.find( c => c.value === category.type)}
         setSelectedType={setSelectedType}
       />
       

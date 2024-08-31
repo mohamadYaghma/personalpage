@@ -4,7 +4,7 @@ import Loading from '@/common/Loading'
 import Select from 'react-select'
 
 
-const categoryTypes = [
+export const categoryTypes = [
     {
         id:  1,
         label : "محصول" ,

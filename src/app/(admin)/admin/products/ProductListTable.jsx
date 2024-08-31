@@ -1,10 +1,28 @@
 import { productListTableHeads } from '@/constants/tableHeads'
+import { useRemoveProduct } from '@/hooks/useProducts'
+import { QueryClient, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 import { HiEye, HiTrash } from 'react-icons/hi'
 import {  RiEdit2Line } from 'react-icons/ri'
 
 
 export default function ProductListTable({products}) {
+
+
+    const {mutateAsync} = useRemoveProduct()
+    const QueryClient  = useQueryClient();
+const removeProductHandler = async (id) =>{
+    try {
+        const {message} = await mutateAsync(id);
+        toast.success(message) ;
+        QueryClient.invalidateQueries({queryKey:["get-products"]})    
+        
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+}
+
   return (
     <div className='overflow-auto shadow-sm my-8'>
         <table className='border-collapse table-auto w-full text-sm min-w-[800px]'>
@@ -53,7 +71,7 @@ export default function ProductListTable({products}) {
                                         <Link href={`/admin/products/${product._id}`}>
                                             <HiEye className='w-6 h-6 text-primary-900' />
                                         </Link>
-                                        <button>
+                                        <button onClick={()=>removeProductHandler(product._id)}>
                                             <HiTrash className='text-rose-600 w-6 h-6'/>
                                         </button>
                                         <Link href={`/admin/products/edit/${product._id}`}>

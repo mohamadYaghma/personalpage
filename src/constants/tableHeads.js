@@ -1,3 +1,4 @@
+// user
 export const userPaymentTheads = [
     {
         id:1,
@@ -59,6 +60,8 @@ export const usersListTableHeads = [
         label:"مشاهده"
     },
 ]
+
+// Product
 
 export const productListTableHeads = [
     {
@@ -192,5 +195,85 @@ export const EditcategoriesListTableHeads = [
         label:"توضیحات",
         name:"description"
     },
+
+]
+
+// Payment
+
+export const PaymentListTableHeads = [
+    {
+        id:1,
+        label:"#"
+    },
+    {
+        id:2,
+        label:"شماره فاکتور"
+    },
+    {
+        id:3,
+        label:"توضیحات"
+    },
+    {
+        id:4,
+        label:"کاربر"
+    },
+    {
+        id:5,
+        label:"محصولات"
+    },
+    {
+        id:6,
+        label:"مبلغ"
+    },
+    {
+        id:7,
+        label:"تاریخ"
+    },
+    {
+        id:8,
+        label:"وضعیت"
+    },
+
+]
+
+// Coupons
+
+export const CouponsListTableHeads = [
+    {
+        id: 1,
+        label: "#",
+      },
+      {
+        id: 2,
+        label: "کد",
+      },
+      {
+        id: 3,
+        label: "نوع",
+      },
+      {
+        id: 4,
+        label: "مقدار",
+      },
+      {
+        id: 6,
+        label: "شامل محصولات",
+      },
+      {
+        id: 7,
+        label: "مقدار مصرفی",
+      },
+      {
+        id: 8,
+        label: "ظرفیت",
+      },
+      {
+        id: 9,
+        label: "تاریخ انقضا",
+      },
+      {
+        id: 10,
+        label: "عملیات",
+      },
 
 ]

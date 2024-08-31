@@ -1,10 +1,29 @@
 import { categoriesListTableHeads } from '@/constants/tableHeads'
+import { useRemoveCategory } from '@/hooks/useCategories'
+import { useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 import { HiEye, HiTrash } from 'react-icons/hi'
 import {  RiEdit2Line } from 'react-icons/ri'
 
 
 export default function CategoriesListTable({categories}) {
+
+    const {mutateAsync} = useRemoveCategory()
+    const QueryClient  = useQueryClient();
+
+const removeCtegoryHandler = async (id) =>{
+    try {
+        const {message} = await mutateAsync(id);
+        toast.success(message) ;
+        QueryClient.invalidateQueries({queryKey:["get-categories"]})    
+        
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+}
+
+
   return (
     <div className='overflow-auto shadow-sm my-8'>
         <table className='border-collapse table-auto w-full text-sm min-w-[800px]'>
@@ -50,7 +69,7 @@ export default function CategoriesListTable({categories}) {
                                         <Link href={`/admin/categories/${category._id}`}>
                                             <HiEye className='w-6 h-6 text-primary-900' />
                                         </Link>
-                                        <button>
+                                        <button onClick={ ()=>removeCtegoryHandler(category._id)}>
                                             <HiTrash className='text-rose-600 w-6 h-6'/>
                                         </button>
                                         <Link href={`/admin/categories/edit/${category._id}`}>

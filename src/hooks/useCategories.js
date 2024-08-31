@@ -1,4 +1,4 @@
-import { addCategory, getCategories, getOneCategoryById, updateCategory } from '@/services/categortService';
+import { addCategory, getCategories, getOneCategoryById, removeCategoryById, updateCategory } from '@/services/categortService';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 
@@ -31,4 +31,10 @@ export const useUpdateCategory=()=>{
 
 export const useAddCategory = () =>{
     return useMutation({mutationFn:addCategory})
+}
+
+// delete category
+
+export const useRemoveCategory = () =>{
+    return useMutation({mutationFn:removeCategoryById})
 }

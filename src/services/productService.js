@@ -35,3 +35,7 @@ export function addProduct(data) {
 export function updateProduct({productId , data}) {
   return http.patch(`/admin/product/update/${productId}` , data ).then(({ data }) => data.data);
 }
+
+export function removeProduct(id) {
+  return http.delete(`/admin/product/remove/${id}`).then(({ data }) => data.data);
+}
