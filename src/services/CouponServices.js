@@ -8,3 +8,14 @@ export function getAllCoupons() {
     return http.post(`/admin/coupon/add`, data ).then(({ data }) => data.data);
   }
   
+  export function removeCoupon(id){
+    return http.delete(`/admin/coupon/remove/${id}`).then(({data})=>data.data);
+  } 
+
+  export function updateCoupon({id , data}) {
+    return http.patch(`/admin/coupon/update/${id}` , data ).then(({ data }) => data.data);
+  }
+
+  export function getOneCouponById(id){
+    return http.get(`/admin/coupon/${id}`).then(({data})=>data.data);
+  }  

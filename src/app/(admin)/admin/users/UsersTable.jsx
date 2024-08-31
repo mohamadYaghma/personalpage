@@ -1,5 +1,6 @@
 import { usersListTableHeads } from '@/constants/tableHeads'
 import { toLocalDateStringShort } from '@/utils/toLocaleDate'
+import { toPersianNumbers } from '@/utils/toPersianNumber'
 import Link from 'next/link'
 import React from 'react'
 import {  HiCheckCircle } from 'react-icons/hi'
@@ -27,7 +28,7 @@ export default function UsersTable({users}) {
                         return(
                             <tr key={user._id}>
                                 <td className='table__td'>
-                                    {index + 1}
+                                    {toPersianNumbers(index + 1)}
                                 </td>
 
                                 <td className='table__td'>

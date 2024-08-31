@@ -1,7 +1,30 @@
 import { CouponsListTableHeads } from '@/constants/tableHeads'
+import { useRemoveCoupon } from '@/hooks/useCoupons';
+import { toLocalDateStringShort } from '@/utils/toLocaleDate';
+import { toPersianNumbers, toPersianNumbersWithComma } from '@/utils/toPersianNumber';
+import { useQueryClient } from '@tanstack/react-query';
+import Link from 'next/link';
+import toast from 'react-hot-toast';
+import { HiEye, HiTrash } from 'react-icons/hi';
+import { RiEdit2Line } from 'react-icons/ri';
 
 
 export default function CouponsListTable({coupons}) {
+
+    const {mutateAsync} = useRemoveCoupon();
+    const queryClient = useQueryClient();
+
+    const removeCouponHandler = async (id) =>{
+        try {
+            const {message} = await mutateAsync(id);
+            toast.success(message);
+            queryClient.invalidateQueries({queryKey: ["get-coupons"]})
+        } catch (error) {
+             toast.error(error?.respone?.data?.message);
+        }
+    }
+    
+
   return (
     <div className='overflow-auto shadow-sm my-8'>
         <table className='border-collapse table-auto w-full text-sm min-w-[800px]'>
@@ -24,7 +47,7 @@ export default function CouponsListTable({coupons}) {
                         return(
                             <tr key={coupon._id}>
                                 <td className='table__td'>
-                                    {index + 1}
+                                    {toPersianNumbers(index + 1)}
                                 </td>
                                 <td className="table__td  whitespace-nowrap font-bold">
                                 {coupon.code}
@@ -32,7 +55,7 @@ export default function CouponsListTable({coupons}) {
                                 <td className="table__td">
                                 <span className="badge badge--primary">{coupon.type}</span>
                                 </td>
-                                <td className="table__td">{coupon.amount}</td>
+                                <td className="table__td">{toPersianNumbersWithComma(coupon.amount)}</td>
                                 <td className="table__td">
                                 <div className="space-y-2 flex flex-col items-start">
                                     {coupon.productIds.map((p) => {
@@ -44,16 +67,16 @@ export default function CouponsListTable({coupons}) {
                                     })}
                                 </div>
                                 </td>
-                                <td className="table__td">{coupon.usageCount}</td>
-                                <td className="table__td">{coupon.usageLimit}</td>
+                                <td className="table__td">{toPersianNumbersWithComma(coupon.usageCount)}</td>
+                                <td className="table__td">{toPersianNumbersWithComma(coupon.usageLimit)}</td>
                                 <td className="table__td">
                                 {toLocalDateStringShort(coupon.expireDate)}
                                 </td>
                                 <td className="table__td font-bold text-lg">
-                                <div className="flex items-center gap-x-4">
-                                    <Link href={`/admin/coupons/${coupon._id}`}>
+                                <div className="flex justify-between items-center gap-x-4">
+                                    {/* <Link href={`/admin/coupons/${coupon._id}`}>
                                     <HiEye className="text-primary-900 w-6 h-6" />
-                                    </Link>
+                                    </Link> */}
                                     <button onClick={() => removeCouponHandler(coupon._id)}>
                                     <HiTrash className="text-rose-600 w-6 h-6" />
                                     </button>

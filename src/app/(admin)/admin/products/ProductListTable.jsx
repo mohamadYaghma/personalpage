@@ -1,5 +1,6 @@
 import { productListTableHeads } from '@/constants/tableHeads'
 import { useRemoveProduct } from '@/hooks/useProducts'
+import { toPersianNumbers, toPersianNumbersWithComma } from '@/utils/toPersianNumber'
 import { QueryClient, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
@@ -45,7 +46,7 @@ const removeProductHandler = async (id) =>{
                         return(
                             <tr key={product._id}>
                                 <td className='table__td'>
-                                    {index + 1}
+                                    {toPersianNumbers(index + 1)}
                                 </td>
 
                                 <td className='table__td font-bold whitespace-nowrap'>
@@ -55,16 +56,16 @@ const removeProductHandler = async (id) =>{
                                     {product.category.title}
                                 </td>
                                 <td className='table__td '>
-                                    {product.price}          
+                                    {toPersianNumbersWithComma(product.price)}          
                                 </td>
                                 <td className='table__td'>
-                                    {product.discount}
+                                    {toPersianNumbersWithComma(product.discount)}
                                 </td>
                                 <td className='table__td'>
-                                    {product.offPrice}
+                                    {toPersianNumbersWithComma(product.offPrice)}
                                 </td>
                                 <td className='table__td'>
-                                    {product.countInStock}
+                                    {toPersianNumbersWithComma(product.countInStock)}
                                 </td>
                                 <td className='table__td font-bold text-base'>
                                     <div className='flex items-center gap-x-4'>

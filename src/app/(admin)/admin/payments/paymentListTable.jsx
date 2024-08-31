@@ -1,6 +1,6 @@
 import { PaymentListTableHeads } from '@/constants/tableHeads'
 import { toLocalDateStringShort } from '@/utils/toLocaleDate'
-import { toPersianNumbersWithComma } from '@/utils/toPersianNumber'
+import { toPersianNumbers, toPersianNumbersWithComma } from '@/utils/toPersianNumber'
 import React from 'react'
 
 export default function PayentsListTable({payments}) {
@@ -26,7 +26,7 @@ export default function PayentsListTable({payments}) {
                         return(
                             <tr key={payment._id}>
                                 <td className='table__td'>
-                                    {index + 1}
+                                    {toPersianNumbers(index + 1)}
                                 </td>
 
                                 <td className='table__td font-bold whitespace-nowrap truncate'>
