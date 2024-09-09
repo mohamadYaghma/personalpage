@@ -49,7 +49,7 @@ export default function CompleteProfile() {
             <div>
             {(
             isLoading ? <Loading />: (
-            <button type="submit" className="btn btn--primary w-full">
+            <button type="submit" className="btn btn--primary w-full bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full transition duration-300 hover:-translate-y-1 shadow-xl">
               ارسال  
             </button>
           ))}

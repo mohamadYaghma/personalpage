@@ -26,46 +26,46 @@ export default function ProductSort() {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const [sort , setSort] = useState("");
+    const [sort, setSort] = useState("");
 
     const createQueryString = useCallback(
-        (name , value)=>{
-            const params = new URLSearchParams(searchParams)
-            params.set(name , value)
-            return params.toString()
+        (name, value) => {
+            const params = new URLSearchParams(searchParams);
+            params.set(name, value);
+            return params.toString();
         },
         [searchParams]
     );
 
-
-    const sortHandler=(e)=>{
-        const value = e.target.value
-         setSort(value);
-         router.push(pathname + "?" + createQueryString("sort" , value ))
+    const sortHandler = (e) => {
+        const value = e.target.value;
+        setSort(value);
+        router.push(pathname + "?" + createQueryString("sort", value));
     };
 
-    useEffect(()=>{
-        setSort(searchParams.get("sort" || ""))
-    },[searchParams]);
+    useEffect(() => {
+        setSort(searchParams.get("sort") || "");
+    }, [searchParams]);
 
-  return (
-    <div>
-        <p className="font-bold mb-4">مرتب سازی محصولات بر اساس</p>
-        {
-            sortOptions.map((item)=>{
-                return(
-                    <RadioInput 
-                        id={item.id}
-                        key={item.id}
-                        label={item.label}
-                        name="product-sort"
-                        value={item.value}
-                        checked={ sort === item.value}
-                        onChange={sortHandler}
-                    />
-                )
-            })
-        }
-    </div>
-  )
+    return (
+        <div className="p-4 bg-white shadow-md rounded-lg mt-6">
+            <p className="font-bold mb-4 text-lg text-gray-800">مرتب سازی محصولات بر اساس</p>
+            <ul className="space-y-4">
+                {sortOptions.map((item) => {
+                    return (
+                        <li key={item.id} className="flex items-center space-x-2">
+                            <RadioInput 
+                                id={item.id}
+                                label={item.label}
+                                name="product-sort"
+                                value={item.value}
+                                checked={sort === item.value}
+                                onChange={sortHandler}
+                            />
+                        </li>
+                    );
+                })}
+            </ul>
+        </div>
+    );
 }

@@ -50,7 +50,7 @@ export default function AddToCart({product}) {
         ):isLoading ? (
             <Loading />
         ) : (
-            <button onClick={addToCartHandler} className='btn btn--primary'>اضافه کردن به سبد خرید </button>
+            <button onClick={addToCartHandler} className='btn btn--primary py-2 px-4 rounded'>افزودن به سبد</button>
         )}
     </div>
   )

@@ -20,7 +20,7 @@ export default function AuthPage() {
 
   const [step , setStep]=useState(1)
 
-  const { data:OtpResponse , error , isLoading , mutateAsync:mutateGetOtp } = useMutation({mutationFn:getOtp,});
+  const { data:OtpResponse , isLoading , mutateAsync:mutateGetOtp } = useMutation({mutationFn:getOtp,});
 
   const { mutateAsync:mutateCheckOtp , isLoading:isCheckingOtp} = useMutation({mutationFn:checkOtp,});
  

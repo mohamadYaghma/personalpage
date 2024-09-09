@@ -12,7 +12,6 @@ export default function ProductFilter({categories}) {
 
     const [selectedCategories , setSelectedCategories] = useState(
         searchParams.get("category")?.split(",") || []
-        // searchParams.getAll("categories")[0].split(",") 
     );
 
     const createQueryString = useCallback(
@@ -22,46 +21,39 @@ export default function ProductFilter({categories}) {
                 return params.toString()
             },
             [searchParams]
-        
-        )
+    );
 
-    const categoryHandler=(e)=>{
-        const value = e.target.value ;
-        if(selectedCategories.includes(value)){
-            const categories = selectedCategories.filter((c)=> c !== value);
-            setSelectedCategories(categories); 
-
-            // const params = new URLSearchParams(searchParams.toString())
-            // params.set("category", categories)
-            router.push(pathname + "?" + createQueryString("category" , categories));
-
-        }else{
-            setSelectedCategories([...selectedCategories , value]);
-            
-            const params = new URLSearchParams(searchParams.toString())
-            params.set("category", [...selectedCategories , value])
-            router.push(pathname + "?" + createQueryString("category" , [...selectedCategories , value]));
+    const categoryHandler = (e) => {
+        const value = e.target.value;
+        if (selectedCategories.includes(value)) {
+            const categories = selectedCategories.filter((c) => c !== value);
+            setSelectedCategories(categories);
+            router.push(pathname + "?" + createQueryString("category", categories));
+        } else {
+            setSelectedCategories([...selectedCategories, value]);
+            router.push(pathname + "?" + createQueryString("category", [...selectedCategories, value]));
         }
-    }
+    };
 
-  return (
-    <div>
-        <p className="font-bold mb-4">دسته بندی محصولات</p>
-        <ul className='space-y-4'>
-            {categories.map((category)=>{
-                return (
-                    <CheckBox 
-                        key={category._id} 
-                        id={category._id} 
-                        value={category.englishTitle} 
-                        name="product-category"
-                        label={category.title}
-                        onChange={categoryHandler}
-                        checked={selectedCategories.includes(category.englishTitle)}
-                    />
-                )
-            })}
-        </ul>
-    </div>
-  )
+    return (
+        <div className="p-4 bg-white shadow-md rounded-lg">
+            <p className="font-bold mb-4 text-lg text-gray-800">دسته بندی محصولات</p>
+            <ul className="space-y-4">
+                {categories.map((category) => {
+                    return (
+                        <li key={category._id} className="flex items-center space-x-2">
+                            <CheckBox 
+                                id={category._id} 
+                                value={category.englishTitle} 
+                                name="product-category"
+                                label={category.title}
+                                onChange={categoryHandler}
+                                checked={selectedCategories.includes(category.englishTitle)}
+                            />
+                        </li>
+                    );
+                })}
+            </ul>
+        </div>
+    );
 }

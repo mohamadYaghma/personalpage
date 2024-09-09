@@ -3,6 +3,7 @@ import '../../globals.css'
 import { Toaster } from 'react-hot-toast'
 import Providers from '../../providers'
 import SideBar from './SideBar'
+import FooterPage from '@/pages/Footer'
 
 export const metadata = {
   title: 'پروفایل کاربر',
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
               {children}   
             </div>
           </div>
+          <FooterPage/>
         </Providers> 
       </body>
     </html>

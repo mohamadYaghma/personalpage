@@ -21,7 +21,7 @@ export function updateProfile(data) {
   return http.patch("/user/update" , data).then(({ data }) => data.data);
 }
 
-export function logote() {
+export function logOut() {
   return http.post("/user/logout");
 }
 

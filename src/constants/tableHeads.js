@@ -139,11 +139,6 @@ export const AddproductListTableHeads = [
         label:"موجودی",
         name:"countInStock"
     },
-    {
-        id:9,
-        label:"لینک عکس محصول",
-        name:"imageLink"
-    },
 
 ]
 
@@ -173,7 +168,7 @@ export const categoriesListTableHeads = [
     },
     {
         id:6,
-        label:"عملیات"
+        label:" "
     },
 
 ]

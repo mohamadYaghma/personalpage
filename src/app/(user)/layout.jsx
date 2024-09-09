@@ -3,6 +3,11 @@ import '../globals.css'
 import Header from '../Header'
 import { Toaster } from 'react-hot-toast'
 import Providers from '../providers'
+import FooterPage from '../Footer'
+
+
+
+
 
 export const metadata = {
   title: 'AdminPanel',
@@ -12,13 +17,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${vazirfont.variable} font-sans` }>
+      <body className={`${vazirfont.variable} font-sans flex flex-col min-h-screen` }>
         <Providers>
           <Toaster />
-          <Header/>
-          <div className='container xl:max-w-screen-xl'>
+          <Header />
+          <div className='container xl:max-w-screen-xl flex-grow'>
             {children}   
           </div>
+          <FooterPage/>
         </Providers> 
       </body>
     </html>

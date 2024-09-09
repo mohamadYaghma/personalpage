@@ -10,6 +10,8 @@ export const useGetProducts=()=>{
     })
 }
 
+// admin add product
+
 export const useAddProduct = () =>{
     return useMutation({mutationFn:addProduct})
 }

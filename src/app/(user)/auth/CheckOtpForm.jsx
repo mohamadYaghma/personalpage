@@ -47,7 +47,7 @@ export default function CheckOtpForm({onSubmit , otp , setOtp,  onBack , time  ,
             <div>
             {(
                 isCheckingOtp ? (<Loading />): (
-                <button type="submit" className="btn btn--primary w-full">
+                <button type="submit" className="btn btn--primary w-full py-3 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full transition duration-300 hover:-translate-y-1 shadow-xl">
                     تایید
                 </button>
           ))}
