@@ -59,7 +59,8 @@ export default function UpdateCouponPage() {
       });
       setExpireDate(new Date(coupon.expireDate));
     }
-  }, [couponData]);
+  }, [coupon]); // اضافه کردن coupon به عنوان وابستگی
+  
 
   if (isLoading) return <Loading />;
 

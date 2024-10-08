@@ -46,15 +46,24 @@ export default async function Products({ searchParams }) {
                   key={product._id}
                 >
                   <div className="relative">
-                    <img  src="/images/ebrahim.jpg" alt="" className="w-full"/> 
+                    <Image
+                      src="/images/ebrahim.jpg"
+                      alt={product.title}
+                      width={400}
+                      height={300}
+                      className="w-full h-auto"
+                    />
                     <div className="absolute top-0 left-0 bg-primary-700 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
                       موجود
                     </div>
                   </div>
+
                   <div className="p-4">
                     <div className="flex justify-between">
-                      <h3 className="text-lg font-medium mb-2">{product.title}</h3>
-                      <LikeProduct product={product}/>
+                      <h3 className="text-lg font-medium mb-2">
+                        {product.title}
+                      </h3>
+                      <LikeProduct product={product} />
                     </div>
                     <p className="text-gray-600 text-sm mb-4">
                       {product.description}

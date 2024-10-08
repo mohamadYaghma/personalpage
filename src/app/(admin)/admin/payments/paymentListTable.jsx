@@ -18,7 +18,7 @@ export default function PaymentsListTable({ payments }) {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
-          {payments.map((payment, index) => (
+          {payments && payments.length > 0 ?(payments.map((payment, index) => (
             <tr key={payment._id} className="hover:bg-gray-100 transition-colors">
               <td className="px-4 py-4 text-center">
                 {toPersianNumbers(index + 1)}
@@ -63,7 +63,7 @@ export default function PaymentsListTable({ payments }) {
                 )}
               </td>
             </tr>
-          ))}
+          ))):( <p>No payments found.</p>)}
         </tbody>
       </table>
 

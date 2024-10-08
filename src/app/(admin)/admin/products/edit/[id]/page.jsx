@@ -60,11 +60,12 @@ export default function EditProductPage() {
 
   useEffect(() => {
     if (product) {
-      setTags(product.tags);
-      setSelectedCategory(product.category);
-      setFormData(includeObject(product, includesProductKey));
+       setTags(product.tags);
+       setSelectedCategory(product.category);
+       setFormData(includeObject(product, includesProductKey));
     }
-  }, [productData]);
+ }, [product]);
+ 
 
   if (isLoadingProduct) return <Loading />;
 

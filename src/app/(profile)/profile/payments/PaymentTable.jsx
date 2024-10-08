@@ -3,7 +3,7 @@ import toLocalDateStringShort from '@/utils/toLocaleDate';
 import { toPersianNumbersWithComma } from '@/utils/toPersianNumber';
 import React, { useState } from 'react';
 
-export default function PaymentTable({ payments }) {
+export default function PaymentTable({  payments = [] }) {
   const [expandedRows, setExpandedRows] = useState({});
 
   const handleToggle = (id) => {
@@ -31,7 +31,7 @@ export default function PaymentTable({ payments }) {
             </tr>
           </thead>
           <tbody>
-            {payments.map((pay, index) => {
+            {payments && payments.length > 0 ?(payments.map((pay, index) => {
               const isExpanded = expandedRows[pay._id];
 
               return (
@@ -80,7 +80,7 @@ export default function PaymentTable({ payments }) {
                   </td>
                 </tr>
               );
-            })}
+            })):( <p>No payments found.</p>)}
           </tbody>
         </table>
       </div>

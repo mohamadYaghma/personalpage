@@ -18,8 +18,11 @@ export default function MePage() {
   const includesKey = ["name", "email", "phoneNumber", "biography"];
 
   useEffect(() => {
-    if (user) setFormData(includeObject(user, includesKey));
+    if (user) {
+      setFormData(includeObject(user, includesKey));
+    }
   }, [user]);
+  
 
   const submitHandler = async (e) => {
     e.preventDefault();

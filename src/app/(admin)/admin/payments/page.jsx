@@ -4,9 +4,8 @@ import Loading from '@/common/Loading';
 import { useGetPayments } from '@/hooks/usePayment';
 import React from 'react'
 import PayentsListTable from './paymentListTable';
-import Link from 'next/link';
 
-export default function page() {
+export default function Page() {
 
     const {data , isLoading} = useGetPayments();
     const {payments} = data || {};

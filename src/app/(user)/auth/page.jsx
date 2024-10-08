@@ -18,7 +18,7 @@ export default function AuthPage() {
 
   const [otp, setOtp] = useState("");
 
-  const [step , setStep]=useState(1)
+  const [step , setStep]=useState(2)
 
   const { data:OtpResponse , isLoading , mutateAsync:mutateGetOtp } = useMutation({mutationFn:getOtp,});
 

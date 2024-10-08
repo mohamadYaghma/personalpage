@@ -52,7 +52,9 @@ export default function CategoryEditPage() {
       setSelectedType(categoryTypes.find((c) => c.value === category.type));
       setFormData(includeObject(category, includesCategoryKey));
     }
-  }, [categoryData]);
+  }, [category, categoryData]);  // افزودن category به وابستگی‌ها
+
+  
 
   if (isLoading) return <Loading />;
 

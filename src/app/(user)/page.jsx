@@ -1,6 +1,7 @@
 "use client"
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -10,10 +11,12 @@ export default function Home() {
     <div className="bg-gray-50">
       {/* بخش بنر با پس زمینه مرتبط */}
       <section className="relative h-[75vh] md:h-screen text-center flex flex-col justify-center items-center text-white">
-        <img
+        <Image
           src="https://via.placeholder.com/1920x1080" // لینک جایگزین تصویر پس‌زمینه
           alt="Jewelry Background"
-          className="absolute top-0 left-0 w-full h-full object-cover z-0"
+          layout="fill"
+          objectFit="cover"
+          className="absolute top-0 left-0 z-0"
         />
         <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40 z-10"></div>
         <div className="relative z-20">
@@ -43,49 +46,49 @@ export default function Home() {
         >
           <SwiperSlide>
             <div className="bg-white p-4 md:p-6 md:mb-3 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <img src="https://via.placeholder.com/400x400" alt="گردنبند طلا" className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
+              <Image src="https://via.placeholder.com/400x400" alt="گردنبند طلا" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
               <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">گردنبندهای طلا</h3>
               <p className="mt-2 text-gray-600 hover:text-primary">گردنبندهای طلای شیک و زیبا برای هر مناسبت.</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="bg-white p-4 md:p-6 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <img src="https://via.placeholder.com/400x400" alt="گردنبند طلا" className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
+              <Image src="https://via.placeholder.com/400x400" alt="گردنبند طلا" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
               <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">گردنبندهای طلا</h3>
               <p className="mt-2 text-gray-600 hover:text-primary">گردنبندهای طلای شیک و زیبا برای هر مناسبت.</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="bg-white p-4 md:p-6 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <img src="https://via.placeholder.com/400x400" alt="گردنبند طلا" className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
+              <Image src="https://via.placeholder.com/400x400" alt="گردنبند طلا" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
               <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">گردنبندهای طلا</h3>
               <p className="mt-2 text-gray-600 hover:text-primary">گردنبندهای طلای شیک و زیبا برای هر مناسبت.</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="bg-white p-4 md:p-6 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <img src="https://via.placeholder.com/400x400" alt="گردنبند طلا" className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
+              <Image src="https://via.placeholder.com/400x400" alt="گردنبند طلا" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
               <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">گردنبندهای طلا</h3>
               <p className="mt-2 text-gray-600 hover:text-primary">گردنبندهای طلای شیک و زیبا برای هر مناسبت.</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="bg-white p-4 md:p-6 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <img src="https://via.placeholder.com/400x400" alt="گردنبند طلا" className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
+              <Image src="https://via.placeholder.com/400x400" alt="گردنبند طلا" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
               <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">گردنبندهای طلا</h3>
               <p className="mt-2 text-gray-600 hover:text-primary">گردنبندهای طلای شیک و زیبا برای هر مناسبت.</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="bg-white p-4 md:p-6 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <img src="https://via.placeholder.com/400x400" alt="حلقه‌های الماس" className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
+              <Image src="https://via.placeholder.com/400x400" alt="حلقه‌های الماس" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
               <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">حلقه‌های الماس</h3>
               <p className="mt-2 text-gray-600 hover:text-primary">حلقه‌های الماس خیره‌کننده برای لحظات ویژه.</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="bg-white p-4 md:p-6 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <img src="https://via.placeholder.com/400x400" alt="دستبندهای طلا" className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
+              <Image src="https://via.placeholder.com/400x400" alt="دستبندهای طلا" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
               <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">دستبندهای طلا</h3>
               <p className="mt-2 text-gray-600 hover:text-primary">دستبندهای طلای زیبا برای تکمیل استایل شما.</p>
             </div>
@@ -100,19 +103,19 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 shadow-lg rounded-lg hover:bg-primary hover:text-white transition duration-300 hover:scale-105">
               <h3 className="text-lg md:text-xl font-bold text-gray-600 hover:text-gray-400">۲۰٪ تخفیف حلقه‌های طلا</h3>
-              <p className="mt-2 text-gray-600 hover:text-gray-400">تخفیف محدود بر روی حلقه‌های طلای منتخب.</p>
+              <p className="mt-2 text-gray-600 hover:text-gray-400">حلقه‌های طلای منتخب را با ۲۰٪ تخفیف خریداری کنید.</p>
             </div>
             <div className="bg-white p-6 shadow-lg rounded-lg hover:bg-primary hover:text-white transition duration-300 hover:scale-105">
-              <h3 className="text-lg md:text-xl font-bold text-gray-600 hover:text-gray-400">خرید یک جفت گوشواره و دریافت یک جفت رایگان</h3>
-              <p className="mt-2 text-gray-600 hover:text-gray-400">فرصت استثنایی برای خرید گوشواره.</p>
+              <h3 className="text-lg md:text-xl font-bold text-gray-600 hover:text-gray-400">خرید گردنبند با ۳۰٪ تخفیف</h3>
+              <p className="mt-2 text-gray-600 hover:text-gray-400">گردنبندهای طلای ویژه با ۳۰٪ تخفیف برای مدت محدود.</p>
             </div>
             <div className="bg-white p-6 shadow-lg rounded-lg hover:bg-primary hover:text-white transition duration-300 hover:scale-105">
-              <h3 className="text-lg md:text-xl font-bold text-gray-600 hover:text-gray-400">ارسال رایگان برای خریدهای بالای ۱۰۰ دلار</h3>
-              <p className="mt-2 text-gray-600 hover:text-gray-400">با خرید بالای ۱۰۰ دلار از ارسال رایگان بهره‌مند شوید.</p>
+              <h3 className="text-lg md:text-xl font-bold text-gray-600 hover:text-gray-400">۱۰٪ تخفیف دستبند الماس</h3>
+              <p className="mt-2 text-gray-600 hover:text-gray-400">دستبندهای الماس خیره‌کننده با ۱۰٪ تخفیف.</p>
             </div>
           </div>
         </div>
       </section>
     </div>
-  )
+  );
 }
