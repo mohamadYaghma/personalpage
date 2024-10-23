@@ -49,7 +49,7 @@ export const usersListTableHeads = [
     },
     {
         id:5,
-        label:"محصولات"
+        label:"خرید ها"
     },
     {
         id:6,

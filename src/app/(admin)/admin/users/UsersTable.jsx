@@ -1,14 +1,34 @@
+import { useState } from 'react';
 import { usersListTableHeads } from '@/constants/tableHeads';
 import { toLocalDateStringShort } from '@/utils/toLocaleDate';
 import { toPersianNumbers } from '@/utils/toPersianNumber';
 import Link from 'next/link';
 import { HiCheckCircle } from 'react-icons/hi';
+import { MdDelete } from 'react-icons/md';
+import ProductsModal from '@/constants/ModalUser';
 
-export default function UsersTable({ users }) {
+export default function UsersTable({ users, onDeleteUser }) {
+  const [selectedUserProducts, setSelectedUserProducts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleShowProducts = (products) => {
+    setSelectedUserProducts(products);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedUserProducts([]);
+  };
+
+  const handleDeleteUser = (userId) => {
+    console.log(`User with ID ${userId} deleted`);
+    onDeleteUser(userId);
+  };
+
   return (
     <div className='overflow-x-auto shadow-md my-8 rounded-lg'>
-      {/* Desktop Table */}
-      <table className='hidden md:table table-auto w-full text-sm min-w-[900px] bg-white'>
+      <table className='table-auto w-full text-sm bg-white'>
         <thead>
           <tr className='bg-gray-100'>
             {usersListTableHeads.map((item) => (
@@ -16,50 +36,51 @@ export default function UsersTable({ users }) {
                 {item.label}
               </th>
             ))}
+            <th className='py-4 px-6 text-gray-700 font-semibold text-center text-base border-b border-gray-300'>عملیات</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user, index) => (
-            <tr key={user._id} className='hover:bg-gray-50 transition-colors'>
-              <td className='px-6 py-3 border-b border-gray-200'>
-                {toPersianNumbers(index + 1)}
-              </td>
-              <td className='px-6 py-3 border-b border-gray-200'>
-                {user.name}
-              </td>
-              <td className='px-6 py-3 border-b border-gray-200'>
-                {user.email}
-              </td>
-              <td className='px-6 py-3 border-b border-gray-200'>
-                <div className='flex items-center gap-x-2'>
-                  {user.phoneNumber}
-                  {user.isVerifiedPhoneNumber && (
-                    <HiCheckCircle className='h-5 w-5 text-green-600' />
-                  )}
-                </div>
-              </td>
-              <td className='px-4 py-2 border-b border-gray-200'>
-                <div className='flex flex-col gap-y-2'>
-                  {user.Products.map((product, index) => (
-                    <span
-                      key={index}
-                      className='px-2 py-1 rounded-lg bg-secondary-500 text-white whitespace-nowrap text-xs'
-                    >
-                      {product.title}
-                    </span>
-                  ))}
-                </div>
-              </td>
-              <td className='px-4 py-2 border-b border-gray-200'>
-                {toLocalDateStringShort(user.createdAt)}
-              </td>
-              <td className='px-4 py-2 border-b border-gray-200 text-center'>
-                <Link href={`/admin/users/${user._id}`} className='text-blue-600 hover:underline'>
-                  مشاهده جزییات
-                </Link>
-              </td>
+          {users && users.length > 0 ? (
+            users.map((user, index) => (
+              <tr key={user._id} className='hover:bg-gray-50 transition-colors'>
+                <td className='px-6 py-3 border-b border-gray-200'>{toPersianNumbers(index + 1)}</td>
+                <td className='px-6 py-3 border-b border-gray-200'>{user.name}</td>
+                <td className='px-6 py-3 border-b border-gray-200'>{user.email}</td>
+                <td className='px-6 py-3 border-b border-gray-200'>
+                  <div className='flex items-center gap-x-2'>
+                    {user.phoneNumber}
+                    {user.isVerifiedPhoneNumber && <HiCheckCircle className='h-5 w-5 text-green-600' />}
+                  </div>
+                </td>
+                <td className='px-4 py-2 border-b border-gray-200'>
+                  <button
+                    onClick={() => handleShowProducts(user.Products)}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
+                  >
+                    مشاهده محصولات
+                  </button>
+                </td>
+                <td className='px-4 py-2 border-b border-gray-200'>{toLocalDateStringShort(user.createdAt)}</td>
+                <td className='px-4 py-2 border-b border-gray-200 text-center'>
+                  <Link href={`/admin/users/${user._id}`} className='text-blue-600 hover:underline'>
+                    مشاهده جزییات
+                  </Link>
+                </td>
+                <td className='px-4 py-2 border-b border-gray-200 text-center'>
+                  <button
+                    onClick={() => handleDeleteUser(user._id)}
+                    className="p-1 text-red-500 hover:text-red-600 transition-colors duration-300"
+                  >
+                    <MdDelete className='h-6 w-6' aria-label="حذف کاربر" />
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={8} className='text-center py-4'>کاربری یافت نشد.</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 
@@ -70,9 +91,7 @@ export default function UsersTable({ users }) {
             <div className='flex justify-between items-center mb-4'>
               <span className='text-gray-500 text-sm'>ردیف: {toPersianNumbers(index + 1)}</span>
               <div className='flex items-center gap-x-2'>
-                {user.isVerifiedPhoneNumber && (
-                  <HiCheckCircle className='h-5 w-5 text-green-600' />
-                )}
+                {user.isVerifiedPhoneNumber && <HiCheckCircle className='h-5 w-5 text-green-600' />}
               </div>
             </div>
             <div className='space-y-2'>
@@ -80,24 +99,29 @@ export default function UsersTable({ users }) {
               <p className='text-gray-600 text-sm'>ایمیل: {user.email}</p>
               <p className='text-gray-600 text-sm'>تلفن: {user.phoneNumber}</p>
               <p className='text-gray-600 text-sm'>محصولات:</p>
-              <div className='flex flex-wrap gap-2'>
-                {user.Products.map((product, index) => (
-                  <span
-                    key={index}
-                    className='px-2 py-1 rounded-lg bg-secondary-500 text-white text-xs'
-                  >
-                    {product.title}
-                  </span>
-                ))}
-              </div>
+              <button
+    onClick={() => handleShowProducts(user.Products)}
+    className="flex items-center justify-center px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600 transition-colors duration-300"
+  >
+    <span>مشاهده محصولات</span>
+  </button>
               <p className='text-gray-600 text-sm'>تاریخ ثبت: {toLocalDateStringShort(user.createdAt)}</p>
               <Link href={`/admin/users/${user._id}`} className='text-blue-600 hover:underline'>
                 مشاهده جزییات
               </Link>
+              <button
+                onClick={() => handleDeleteUser(user._id)}
+                className="mt-2 p-1 text-red-500 hover:text-red-600 transition-colors duration-300"
+              >
+                <MdDelete className='h-6 w-6' aria-label="حذف کاربر" />
+              </button>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Products Modal */}
+      <ProductsModal products={selectedUserProducts} isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>
   );
 }

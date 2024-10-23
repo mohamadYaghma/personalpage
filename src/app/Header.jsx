@@ -5,6 +5,7 @@ import { toPersianNumbers } from '@/utils/toPersianNumber';
 import Link from 'next/link';
 import { HiShoppingBag } from 'react-icons/hi';
 import { User } from "@nextui-org/react";
+import { FaShopify } from "react-icons/fa6";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,13 +16,15 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  if (isLoading) return null; // نمایش لودینگ تا زمان دریافت اطلاعات
+
   return (
     <header
       className={`backdrop-blur-md bg-white/80 shadow-md mb-10 sticky top-0 z-50 transition-all duration-200 ${
         isLoading ? "blur-sm opacity-70" : "opacity-100 blur-0"
       }`}
     >
-      <nav className="container xl:max-w-screen-xl">
+      <nav className="container md:w-8/12 xl:max-w-screen-xl">
         <div className="flex items-center justify-between py-2">
           {/* آیکون منوی همبرگری - فقط در موبایل */}
           <div className="md:hidden mr-4">
@@ -50,8 +53,7 @@ export default function Header() {
           <ul
             className={`${
               isMenuOpen ? 'block' : 'hidden'
-            } md:flex items-center space-y-4 md:space-y-0 md:space-x-6 text-right w-full flex justify-around align-middle `}
-          >
+            } md:flex items-center space-y-4 md:space-y-0 md:space-x-6 text-right w-full flex justify-around align-middle `}>
             <li className="md:block hidden">
               <Link className="block py-2" href={"/"}>
                 خانه
@@ -62,23 +64,28 @@ export default function Header() {
                 محصولات
               </Link>
             </li>
-            <li className="md:block hidden">
-              <Link className="block py-2" href={"/profile"}>
-                پنل کاربر
-              </Link>
-            </li>
-            <li className="md:block hidden">
-              <Link className="block py-2" href={"/admin"}>
-                پنل ادمین
-              </Link>
-            </li>
-            
+
+            {/* بررسی نقش کاربر برای نمایش پنل */}
+            {user?.role === 'ADMIN' ? (
+              <li className="md:block hidden">
+                <Link className="block py-2" href={"/admin"}>
+                  پنل ادمین
+                </Link>
+              </li>
+            ) : (
+              <li className="md:block hidden">
+                <Link className="block py-2" href={"/profile"}>
+                  پنل کاربر
+                </Link>
+              </li>
+            )}
+
             {/* سبد خرید با آیکون - فقط در دسکتاپ */}
             <li className="relative hidden md:block">
               <Link href={"/cart"} className="block py-2">
-                <HiShoppingBag className='h-8 w-8 mx-auto md:mx-0'/>
+                <FaShopify className="h-7 w-7 mx-auto md:mx-0" />
                 {/* نشان تعداد محصولات */}
-                {cart && cart.payDetail.productIds.length > 0 && (
+                {cart && cart.payDetail?.productIds?.length > 0 && (
                   <span className="absolute bottom-0 right-2 inline-flex items-center 
                   justify-center px-2 py-0.5 text-xs font-bold leading-none
                    text-white bg-red-600 rounded-full transform translate-x-1/2 -translate-y-1/2">
@@ -91,10 +98,10 @@ export default function Header() {
             {data ? (
               <li className="md:block hidden">
                 <div className='flex gap-x-5'>
-                  <Link className="block py-2" href={"/profile"}>              
+                  <Link className="block py-2" href={"/profile"}>
                     <User
                       dir='ltr'
-                      name={user.name}
+                      name={user?.name}
                       description="Product Designer"
                       avatarProps={{
                         src: "https://avatars.githubusercontent.com/u/30373425?v=4"
@@ -120,7 +127,7 @@ export default function Header() {
               <li>
                 <User
                   dir='ltr'
-                  name={user.name}
+                  name={user?.name}
                   avatarProps={{
                     src: "https://avatars.githubusercontent.com/u/30373425?v=4",
                     size: "sm",
@@ -144,22 +151,28 @@ export default function Header() {
                 محصولات
               </Link>
             </li>
-            <li>
-              <Link className="block py-2" href={"/profile"}>
-                پنل کاربر
-              </Link>
-            </li>
-            <li>
-              <Link className="block py-2" href={"/admin"}>
-                پنل ادمین
-              </Link>
-            </li>
+
+            {/* بررسی نقش کاربر برای نمایش پنل */}
+            {user?.role === 'ADMIN' ? (
+              <li>
+                <Link className="block py-2" href={"/admin"}>
+                  پنل ادمین
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <Link className="block py-2" href={"/profile"}>
+                  پنل کاربر
+                </Link>
+              </li>
+            )}
+
             {/* سبد خرید با آیکون - فقط در موبایل */}
             <li className="relative md:hidden">
               <Link href={"/cart"} className="block py-2">
-                <HiShoppingBag className='h-8 w-8 mx-auto'/>
+                <FaShopify className="h-8 w-8 mx-auto" />
                 {/* نشان تعداد محصولات */}
-                {cart && cart.payDetail.productIds.length > 0 && (
+                {cart && cart.payDetail?.productIds?.length > 0 && (
                   <span className="absolute bottom-0 right-2 inline-flex items-center 
                   justify-center px-2 py-0.5 text-xs font-bold leading-none
                    text-white bg-red-600 rounded-full transform translate-x-1/2 -translate-y-1/2">
@@ -168,7 +181,6 @@ export default function Header() {
                 )}
               </Link>
             </li>
-            
           </ul>
         )}
       </nav>

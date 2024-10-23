@@ -5,7 +5,7 @@ import { useAddProduct } from '@/hooks/useProducts';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import ProductForm from '@/constants/ProductForm';
-import http from '@/services/httpService';
+// import http from '@/services/httpService';
 
 export default function AddProductPage() {
     
@@ -34,25 +34,38 @@ export default function AddProductPage() {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        const formDataWithImage = new FormData();
+        Object.keys(formData).forEach((key) => {
+            formDataWithImage.append(key, formData[key]);
+        });
+        formDataWithImage.append('tags', tags);
+        formDataWithImage.append('category', selectedCategory._id);
+        
+        if (selectedImage) {
+            formDataWithImage.append('imageLink', selectedImage);
+        }
+        
         try {
-            const { message } = await mutateAsync({
-                ...formData, 
-                tags, 
-                category: selectedCategory._id,
-            });
+            const { message } = await mutateAsync(formDataWithImage); // اطمینان حاصل کنید که `mutateAsync` این نوع داده را می‌پذیرد
             toast.success(message);
             router.push("/admin/products");
         } catch (error) {
-            toast.error(error?.response?.data?.message);
+            toast.error(error?.response?.data?.message || "خطا در آپلود تصویر");
         }
     }
     
     const [selectedImage, setSelectedImage] = useState(null);
     
     const handleImageUpload = async (event) => {
-        const file = event.target.files[0];
+        const file = event.target.files[0]; // فایل را از رویداد دریافت کنید
+        if (!file) {
+            toast.error("لطفا یک فایل انتخاب کنید");
+            return;
+        }
+    
         const formData = new FormData();
-        formData.append('image', file);
+        formData.append('imageLink', file);
     
         try {
             const response = await http.post('/admin/product/add', formData, {
@@ -60,7 +73,7 @@ export default function AddProductPage() {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            setFormData(prevData => ({...prevData, imageLink: response.data.imageUrl}));
+            setFormData(prevData => ({ ...prevData, imageLink: response.data.imageUrl }));
             toast.success("تصویر با موفقیت آپلود شد");
         } catch (error) {
             console.error("Error uploading image:", error.response ? error.response.data : error.message);

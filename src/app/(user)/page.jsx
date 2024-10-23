@@ -12,7 +12,7 @@ export default function Home() {
       {/* بخش بنر با پس زمینه مرتبط */}
       <section className="relative h-[75vh] md:h-screen text-center flex flex-col justify-center items-center text-white">
         <Image
-          src="https://via.placeholder.com/1920x1080" // لینک جایگزین تصویر پس‌زمینه
+          src="https://placekitten.com/1920/1080" // لینک جایگزین تصویر پس‌زمینه
           alt="Jewelry Background"
           layout="fill"
           objectFit="cover"
@@ -44,55 +44,21 @@ export default function Home() {
             1024: { slidesPerView: 4, spaceBetween: 20 }, // فاصله کمتر در دسکتاپ
           }}
         >
-          <SwiperSlide>
-            <div className="bg-white p-4 md:p-6 md:mb-3 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <Image src="https://via.placeholder.com/400x400" alt="گردنبند طلا" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
-              <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">گردنبندهای طلا</h3>
-              <p className="mt-2 text-gray-600 hover:text-primary">گردنبندهای طلای شیک و زیبا برای هر مناسبت.</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="bg-white p-4 md:p-6 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <Image src="https://via.placeholder.com/400x400" alt="گردنبند طلا" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
-              <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">گردنبندهای طلا</h3>
-              <p className="mt-2 text-gray-600 hover:text-primary">گردنبندهای طلای شیک و زیبا برای هر مناسبت.</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="bg-white p-4 md:p-6 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <Image src="https://via.placeholder.com/400x400" alt="گردنبند طلا" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
-              <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">گردنبندهای طلا</h3>
-              <p className="mt-2 text-gray-600 hover:text-primary">گردنبندهای طلای شیک و زیبا برای هر مناسبت.</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="bg-white p-4 md:p-6 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <Image src="https://via.placeholder.com/400x400" alt="گردنبند طلا" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
-              <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">گردنبندهای طلا</h3>
-              <p className="mt-2 text-gray-600 hover:text-primary">گردنبندهای طلای شیک و زیبا برای هر مناسبت.</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="bg-white p-4 md:p-6 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <Image src="https://via.placeholder.com/400x400" alt="گردنبند طلا" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
-              <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">گردنبندهای طلا</h3>
-              <p className="mt-2 text-gray-600 hover:text-primary">گردنبندهای طلای شیک و زیبا برای هر مناسبت.</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="bg-white p-4 md:p-6 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <Image src="https://via.placeholder.com/400x400" alt="حلقه‌های الماس" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
-              <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">حلقه‌های الماس</h3>
-              <p className="mt-2 text-gray-600 hover:text-primary">حلقه‌های الماس خیره‌کننده برای لحظات ویژه.</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="bg-white p-4 md:p-6 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
-              <Image src="https://via.placeholder.com/400x400" alt="دستبندهای طلا" width={400} height={400} className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" />
-              <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">دستبندهای طلا</h3>
-              <p className="mt-2 text-gray-600 hover:text-primary">دستبندهای طلای زیبا برای تکمیل استایل شما.</p>
-            </div>
-          </SwiperSlide>
+          {Array(7).fill(null).map((_, index) => (
+            <SwiperSlide key={index}>
+              <div className="bg-white p-4 md:p-6 md:mb-3 shadow-lg rounded-lg hover:shadow-2xl transition duration-300 hover:scale-105 max-w-sm md:max-w-xs mx-auto">
+                <Image 
+                  src={`https://placekitten.com/400/400?image=${index + 1}`} 
+                  alt={`گردنبند طلا ${index + 1}`} 
+                  width={400} 
+                  height={400} 
+                  className="w-full h-48 md:h-64 object-cover mb-4 rounded-lg" 
+                />
+                <h3 className="text-xl md:text-2xl font-bold text-primary hover:text-gray-500">گردنبندهای طلا</h3>
+                <p className="mt-2 text-gray-600 hover:text-primary">گردنبندهای طلای شیک و زیبا برای هر مناسبت.</p>
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </section>
 

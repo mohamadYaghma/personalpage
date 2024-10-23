@@ -1,22 +1,22 @@
 import { getAllUsers, getUserProfile } from '@/services/autchServices';
 import { useQuery } from '@tanstack/react-query';
 
-
-export const useGetUser=()=>{
+// برای دریافت اطلاعات یک کاربر
+export const useGetUser = () => {
     return useQuery({
-        queryKey:["get-user"],
-        queryFn:getUserProfile,
-        retry:false,
-        refetchOnWindowFocus:true,
-    })
-}
+        queryKey: ["get-user"],
+        queryFn: getUserProfile,
+        retry: false,
+        refetchOnWindowFocus: true,
+    });
+};
 
-// for amin panel
-export const useGetUsers=()=>{
+// برای دریافت لیست کاربران با پشتیبانی از جستجو در پنل ادمین
+export const useGetUsers = (searchQuery = "") => {
     return useQuery({
-        queryKey:["get-user"],
-        queryFn:getAllUsers,
-        retry:false,
-        refetchOnWindowFocus:true,
-    })
-}
+        queryKey: ["get-users", searchQuery], // جستجو را به عنوان queryKey اضافه می‌کنیم
+        queryFn: () => getAllUsers(searchQuery), // تابعی که با پارامتر جستجو صدا زده می‌شود
+        retry: false,
+        refetchOnWindowFocus: true,
+    });
+};

@@ -14,7 +14,7 @@ export default function AuthPage() {
 
   const [time , setTime] = useState(RESEND_TIME);
 
-  const [phoneNumber , setPhoneNumber] = useState("");
+  const [phoneNumber , setPhoneNumber] = useState("09151253699");
 
   const [otp, setOtp] = useState("");
 

@@ -60,7 +60,7 @@ export default function FooterPage() {
         </div>
 
         <div className="w-full bg-black/5 p-4 text-center">
-          © 2023 Copyright: mohamad yaghma
+          © 2024 Copyright: mohamad yaghma
         </div>
       </footer>
     </div>

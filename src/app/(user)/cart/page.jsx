@@ -35,7 +35,7 @@ export default function Page() {
                 <div className="text-center">
                     <Link 
                         href="/products" 
-                        className="text-lg font-bold text-blue-600 hover:text-blue-800 underline">
+                        className=" text-lg font-bold text-blue-600 hover:text-blue-800 ">
                         رفتن به صفحه محصولات
                     </Link>
                 </div>

@@ -27,6 +27,12 @@ export function logOut() {
 
 // admin related fetchs : 
 
-export function getAllUsers() {
-  return http.get("/admin/user/list").then(({ data }) => data.data);
+// تابع به‌روزرسانی شده برای گرفتن لیست کاربران با امکان جستجو
+export function getAllUsers(searchQuery = "") {
+  const queryParam = searchQuery ? `?search=${encodeURIComponent(searchQuery)}` : ""; // استفاده از encodeURIComponent برای اطمینان از فرمت درست URL
+  return http.get(`/admin/user/list${queryParam}`).then(({ data }) => data.data)
+    .catch((error) => {
+      console.error("Error fetching users:", error);
+      throw error; // اینجا می‌توانید خطا را مدیریت کنید یا به کاربر نشان دهید
+    });
 }

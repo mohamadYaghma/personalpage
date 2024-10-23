@@ -31,9 +31,9 @@ export default function PaymentsListTable({ payments }) {
               </td>
               <td className="px-4 py-4 text-gray-800">
                 <div className="flex flex-col items-center md:items-start">
-                  <span>{payment.user.name}</span>
-                  <span className="text-gray-600">{payment.user.email}</span>
-                  <span className="font-bold">{payment.user.phoneNumber}</span>
+                  <span>{payment?.user?.name || 'نام کاربر موجود نیست'}</span>
+                  <span className="text-gray-600">{payment.user?.email || 'ایمیل موجود نیست'}</span>
+                  <span className="font-bold">{payment.user?.phoneNumber || 'تلفن موجود نیست'}</span>
                 </div>
               </td>
               <td className="px-4 py-4">
@@ -63,7 +63,7 @@ export default function PaymentsListTable({ payments }) {
                 )}
               </td>
             </tr>
-          ))):( <p>No payments found.</p>)}
+          ))):( <p>خریدی انجام نداده اید.</p>)}
         </tbody>
       </table>
 
