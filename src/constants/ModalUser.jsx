@@ -24,7 +24,7 @@ export default function ProductsModal({ products, isOpen, onClose }) {
 
   return (
     <div
-    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+    className="fixed inset-0 z-50 flex items-center justify-center  bg-opacity-50"
     onClick={handleBackgroundClick}
   >
     <div className="bg-white rounded-lg shadow-lg p-6 max-w-3xl w-full mx-4 sm:mx-6 relative max-h-screen h-full sm:h-auto sm:max-h-[80vh] overflow-y-auto">

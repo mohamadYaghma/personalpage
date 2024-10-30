@@ -1,17 +1,17 @@
 "use client"
 import Loading from "@/common/Loading";
-import { useGetProductById } from "@/hooks/useProducts";
+import { useGetProductByIds } from "@/hooks/useProducts";
 import { useParams } from "next/navigation";
 
 export default function ProductPage() {
     const { id } = useParams();    
-    const { isLoading, data } = useGetProductById(id);
+    const { isLoading, data } = useGetProductByIds(id);
     const { product } = data || {};
     const productImageUrl = product?.imageLink; // فرض کنید `product` شیء محصولی است که دریافت کرده‌اید
 
     if (isLoading) return <Loading />;
 
-    console.log('Product Image URL:', productImageUrl); // Debugging line
+    // console.log('Product Image URL:', productImageUrl); // Debugging line
 
     return (
         <div className="p-4">

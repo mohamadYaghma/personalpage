@@ -204,29 +204,33 @@ export const PaymentListTableHeads = [
         id:2,
         label:"شماره فاکتور"
     },
+    // {
+    //     id:3,
+    //     label:"توضیحات"
+    // },
     {
         id:3,
-        label:"توضیحات"
-    },
-    {
-        id:4,
         label:"کاربر"
     },
     {
-        id:5,
+        id:4,
         label:"محصولات"
     },
     {
-        id:6,
+        id:5,
         label:"مبلغ"
     },
     {
-        id:7,
+        id:6,
         label:"تاریخ"
     },
     {
-        id:8,
+        id:7,
         label:"وضعیت"
+    },
+    {
+        id:8,
+        label:"جزئیات"
     },
 
 ]

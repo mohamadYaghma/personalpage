@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
             <div className="col-span-1 bg-gray-100 overflow-y-auto p-4">
               <AdminSideBar />
             </div>
-            <div className="col-span-4 overflow-y-auto p-4 xl:max-w-screen-xl">
+            <div className="col-span-4 overflow-y-auto  xl:max-w-screen-xl">
               {children}
             </div>
           </div>

@@ -1,35 +1,39 @@
-"use client";
-
-import Loading from "@/common/Loading";
-import { useGetUser } from "@/hooks/useAuth";
-import { convertShamsiToGregorian } from "@/utils/convertDate";
-import toLocaleDate, { toLocalDateStringShort } from "@/utils/toLocaleDate";
-import { toPersianNumbers, toPersianNumbersWithComma } from "@/utils/toPersianNumber";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+"use client"
+import { useEffect, useState } from 'react';
+import { useGetUser } from '@/hooks/useAuth';
+import Loading from '@/common/Loading';
 import { FaTag, FaDollarSign, FaShoppingCart, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import toLocaleDate, { toLocalDateStringShort } from '@/utils/toLocaleDate';
+import { toPersianNumbersWithComma } from '@/utils/toPersianNumber';
+import { useParams } from 'next/navigation';
 
-export default function Page() {
-  const { id } = useParams();
-  const { data, isLoading } = useGetUser(id);
-  const { user, payments } = data || {};
-
-  const [openSections, setOpenSections] = useState({}); // وضعیت باز و بسته بودن هر بخش
+export default function UserDetails() {
+  const { id } = useParams();  // گرفتن id از URL
+  const [ready, setReady] = useState(false); // مدیریت وضعیت آماده بودن
 
   useEffect(() => {
-    if (payments) {
-      console.log("Payments data after load:", payments);
+    if (id) {
+      setReady(true); // وقتی id موجود باشد، آماده می‌شویم
     }
-  }, [payments]);
+  }, [id]);
+
+  // درخواست به API فقط زمانی که id موجود است
+  const { data, isLoading } = useGetUser(id, { enabled: ready && !!id });
+  const { user, payments } = data || {};
+  const [openSections, setOpenSections] = useState({});
 
   const toggleSection = (index) => {
     setOpenSections((prevState) => ({
       ...prevState,
-      [index]: !prevState[index], // تغییر وضعیت باز یا بسته بودن
+      [index]: !prevState[index],
     }));
   };
 
-  if (isLoading) return <Loading />;
+  // نمایش لودینگ فقط زمانی که یا id موجود نیست یا در حال گرفتن داده‌ها هستیم
+  if (!ready || isLoading) return <Loading />;
+
+  // اگر داده‌ای دریافت نشد
+  if (!user) return <div>کاربری یافت نشد</div>;
 
   return (
     <div className="container mx-auto p-6">
@@ -43,42 +47,51 @@ export default function Page() {
         </div>
       </div>
 
+      {/* نمایش خریدها */}
       <h2 className="text-2xl font-semibold mb-4 text-center">خریدها</h2>
       <div className="grid grid-cols-1 gap-4">
-        {payments && payments.length > 0 ? payments.map((payment, index) => (
-          <div key={index} className="bg-white shadow-lg rounded-lg p-4">
-            <div
-              className="flex justify-between items-center cursor-pointer"
-              onClick={() => toggleSection(index)}
-            >
-              <h3 className="text-lg font-semibold mb-2">
-                تاریخ خرید: {convertShamsiToGregorian(payment.paymentDate)}
-              </h3>
-              <button className="focus:outline-none">
-                {openSections[index] ? <FaChevronUp /> : <FaChevronDown />}
-              </button>
-            </div>
+        {payments && payments.length > 0 ? (
+          payments.map((payment, index) => (
+            <div key={index} className="bg-white shadow-lg rounded-lg p-4">
+              <div
+                className="flex justify-between items-center cursor-pointer"
+                onClick={() => toggleSection(index)}
+              >
+                <h3 className="text-lg font-semibold mb-2">
+                  تاریخ خرید: {toLocalDateStringShort(payment.paymentDate)}
+                </h3>
+                <button className="focus:outline-none">
+                  {openSections[index] ? <FaChevronUp /> : <FaChevronDown />}
+                </button>
+              </div>
 
-            {openSections[index] && (
-              <ul className="list-none space-y-2">
-                {payment.cart?.productDetail?.length > 0 ? (
-                  payment.cart.productDetail.map((product) => (
-                    <li key={product._id} className="p-4 border border-gray-200 rounded-lg shadow-sm flex items-start justify-between">
-                      <div className="flex flex-col">
-                        <span className="text-lg font-medium">{product.title}</span>
-                        <span className="text-gray-500"><FaDollarSign className="inline mr-1" /> قیمت: {toPersianNumbersWithComma(product.price)} تومان</span>
-                        <span className="text-gray-500"><FaShoppingCart className="inline mr-1" /> تعداد: {toPersianNumbersWithComma(product.quantity)} عدد</span>
-                        <span className="text-gray-500"><FaTag className="inline mr-1" /> تخفیف: {product.discount ? toPersianNumbersWithComma(product.discount) : toPersianNumbers(0)} تومان</span>
-                      </div>
-                    </li>
-                  ))
-                ) : (
-                  <li className="text-gray-500">محصولی وجود ندارد</li>
-                )}
-              </ul>
-            )}
-          </div>
-        )) : (
+              {openSections[index] && (
+                <ul className="list-none space-y-2">
+                  {payment.cart?.productDetail?.length > 0 ? (
+                    payment.cart.productDetail.map((product) => (
+                      <li key={product._id} className="p-4 border border-gray-200 rounded-lg shadow-sm flex items-start justify-between">
+                        <div className="flex flex-col">
+                          <span className="text-lg font-medium">{product.title}</span>
+                          <span className="text-gray-500">
+                            <FaDollarSign className="inline mr-1" /> قیمت: {toPersianNumbersWithComma(product.price)} تومان
+                          </span>
+                          <span className="text-gray-500">
+                            <FaShoppingCart className="inline mr-1" /> تعداد: {toPersianNumbersWithComma(product.quantity)} عدد
+                          </span>
+                          <span className="text-gray-500">
+                            <FaTag className="inline mr-1" /> تخفیف: {product.discount ? toPersianNumbersWithComma(product.discount) : '0'} تومان
+                          </span>
+                        </div>
+                      </li>
+                    ))
+                  ) : (
+                    <li className="text-gray-500">محصولی وجود ندارد</li>
+                  )}
+                </ul>
+              )}
+            </div>
+          ))
+        ) : (
           <div className="text-center text-gray-500">خریدی وجود ندارد.</div>
         )}
       </div>

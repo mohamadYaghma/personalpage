@@ -50,7 +50,7 @@ export default function ProductListTable({ products }) {
     const handleCategorySelect = (category) => {
         setSelectedCategory(category);
         closeModal();
-        console.log(`Selected Category: ${category}`);
+        // console.log(`Selected Category: ${category}`);
     };
 
     return (
