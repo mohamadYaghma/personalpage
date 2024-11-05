@@ -36,3 +36,20 @@ export function getAllUsers(searchQuery = "") {
       throw error; // اینجا می‌توانید خطا را مدیریت کنید یا به کاربر نشان دهید
     });
 }
+
+
+export function singinApi(data) {
+  return http.post("/user/login/email", data).then(({ data }) => data.data);
+}
+
+export function signupApi(data) {
+  return http.post("/user/signup", data, { withCredentials: true })
+    .then(({ data }) => {
+      console.log("API Response:", data);
+      return data.data; // بازگرداندن داده‌های دریافتی از API
+    })
+    .catch((error) => {
+      console.error("Signup error:", error);
+      throw error?.response?.data?.message || "خطایی در ثبت‌نام رخ داده است";
+    });
+}

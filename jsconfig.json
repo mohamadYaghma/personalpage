@@ -9,6 +9,7 @@
       "@/services/*": ["./src/services/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/public/*": ["./public/*"],
+      "@/context/*": ["./context/*"],
     }
   }
 }

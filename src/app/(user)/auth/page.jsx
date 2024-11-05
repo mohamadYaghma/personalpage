@@ -1,108 +1,26 @@
-"use client";
-import React, { useEffect, useState } from 'react'
-import SendOtpForm from './SendOtpForm'
-import toast from 'react-hot-toast';
-import { useMutation } from "@tanstack/react-query";
-import {getOtp , checkOtp} from '@/services/autchServices';
-import CheckOtpForm from './CheckOtpForm';
-import { useRouter } from 'next/navigation';
-
-const RESEND_TIME = 90 ;
+import Link from 'next/link';
 
 export default function AuthPage() {
-  const router = useRouter();
-
-  const [time , setTime] = useState(RESEND_TIME);
-
-  const [phoneNumber , setPhoneNumber] = useState("09383686888");
-
-  const [otp, setOtp] = useState("");
-
-  const [step , setStep]=useState(2)
-
-  const { data:OtpResponse , isLoading , mutateAsync:mutateGetOtp } = useMutation({mutationFn:getOtp,});
-
-  const { mutateAsync:mutateCheckOtp , isLoading:isCheckingOtp} = useMutation({mutationFn:checkOtp,});
- 
-  useEffect(()=>{
-    const timer = time > 0 && setInterval(()=>setTime((t)=>t-1),1000);
-    return ()=>{
-      if(timer) clearInterval(timer);
-    }
-  },[time])
-
-  const phoneNumberHandler =(e)=>{
-    setPhoneNumber(e.target.value);
-  }
-
-  const sendOtpHandler=async(e)=>{
-    e.preventDefault();
-    try{
-      const data = await mutateGetOtp({phoneNumber});   
-      toast.success(data.message);
-      setStep(2);
-      setTime(RESEND_TIME);
-      setOtp("");
-    }catch(error){
-
-      toast.error(error?.response?.data.message)
-
-    }
-  }
-
-  const checkOtpHandler=async(e)=>{
-    e.preventDefault();
-
-    try{
-      const {message , user} = await mutateCheckOtp({phoneNumber , otp});   
-      toast.success(message);
-      if(user.isActive){
-        router.push("/");
-      }else{
-        router.push("/complete-profile")
-      }
-    }catch(error){
-
-      toast.error(error?.response?.data.message)
-
-    }
-  }
-
-  const renderSteps=()=>{
-    switch(step){
-      case 1:
-        return(
-          <SendOtpForm 
-              phoneNumber={phoneNumber} 
-              onChange={phoneNumberHandler}
-              onsubmit={sendOtpHandler}  
-              isLoading={isLoading}
-            />
-        );
-      case 2:
-        return (
-          <CheckOtpForm 
-              onBack={()=>setStep((s)=>s-1)}
-              onSubmit={checkOtpHandler} 
-              otp={otp}
-              setOtp={setOtp}
-              time={time}
-              onResendOtp={sendOtpHandler}
-              OtpResponse={OtpResponse}
-              isCheckingOtp={isCheckingOtp}
-              />
-        )
-      default:
-        return null;
-    }
-  }
-
   return (
-
-    <div className='flex justify-center'>
-        <div className='w-full sm:max-w-sm'>
-          {renderSteps()}
-        </div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-primary-500 to-primary-400 p-6">
+      <h2 className="text-2xl font-bold text-secondary-900 mb-6">روش ورود خود را انتخاب کنید</h2>
+      <div className="space-y-4 w-full max-w-sm">
+        <Link href="/auth/signin-phone">
+          <button className="btn w-full bg-white text-primary-600 hover:bg-primary-600 hover:text-white transition duration-200 rounded-lg py-3 shadow-md">
+            ورود با شماره تلفن
+          </button>
+        </Link>
+        <Link href="/auth/signin-email">
+          <button className="btn w-full bg-white text-primary-600 hover:bg-primary-600 hover:text-white transition duration-200 rounded-lg py-3 shadow-md">
+            ورود با ایمیل و رمز عبور
+          </button>
+        </Link>
+        <Link href="/auth/signup">
+          <button className="btn w-full bg-white text-primary-600 hover:bg-primary-600 hover:text-white transition duration-200 rounded-lg py-3 shadow-md">
+            ثبت نام
+          </button>
+        </Link>
+      </div>
     </div>
-  )
+  );
 }
